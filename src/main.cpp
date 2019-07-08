@@ -1,4 +1,4 @@
-// battery powered, intermittent monitor for camping fridge
+// battery powered, intermittent monitor for swimming pool
 
 #include "main.h"
 #include "functions.h"
@@ -7,7 +7,7 @@ void setup()
 {
 	bootMillis = millis();
 	Serial.begin(115200);
-	Serial.println("\n\rFridge Rev 1.1 20190704");
+	Serial.println("\n\rPooltemps Rev 1.1 20190708");
 	// join local network and internet
 	joinNet();
 	// setup over the air updates

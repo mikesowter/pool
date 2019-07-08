@@ -12,17 +12,17 @@ extern float celsius[];
 
 void handleMetrics() {
   longStr[0]='\0';
-  addCstring("\n# TYPE frProbe0 guage" );
-  addCstring("\nfrProbe0 ");
+  addCstring("# TYPE spPoolTemp guage" );
+  addCstring("\nspPoolTemp ");
   addCstring(f2s2(celsius[0]));
-  addCstring("\n# TYPE frProbe1 guage" );
-  addCstring("\nfrProbe1 ");
+  addCstring("\n# TYPE spPumpTemp guage" );
+  addCstring("\nspPumpTemp ");
   addCstring(f2s2(celsius[1]));
-  addCstring("\n# TYPE frProbe2 guage" );
-  addCstring("\nfrProbe2 ");
+  addCstring("\n# TYPE spAirTemp guage" );
+  addCstring("\nspAirTemp ");
   addCstring(f2s2(celsius[2]));
-  addCstring("\n# TYPE frWifiSignal guage" );
-  addCstring("\nfrWifiSignal ");
+  addCstring("\n# TYPE spWifiSignal guage" );
+  addCstring("\nspWifiSignal ");
   addCstring(f2s2(-WiFi.RSSI()));
   addCstring( "\n" );
   server.send ( 200, "text/plain", longStr );

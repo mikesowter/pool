@@ -10,7 +10,7 @@ void diagMess(const char* mess);
 
 IPAddress localIP,ausTimeServerIP;
 IPAddress localTimeServerIP(192, 168, 1, 10);
-IPAddress ip(192, 168, 1, 59);
+IPAddress ip(192, 168, 1, 51);
 IPAddress gateway(192, 168, 1, 1);
 IPAddress subnet(255, 255, 255, 0);
 IPAddress dns(192, 168, 1, 1);

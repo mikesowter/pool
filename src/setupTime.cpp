@@ -26,7 +26,7 @@ void setupTime() {
   strcat(charBuf," ");
   strcat(charBuf,timeStamp());
   Serial.println(charBuf);
-  strcpy(todayName,"/fr");
+  strcpy(todayName,"/pt");
   strcat(todayName,dateStamp());
   strcat(todayName,".csv");
 }
