@@ -14,7 +14,7 @@ void setupServer() {
   server.onNotFound ( handleNotFound );
   server.begin();
   Serial.println( "server started" );
-  if ( MDNS.begin ( "trial" ) ) {
-    Serial.print("mDNS responder started: http://trial.local");
+  if ( MDNS.begin ( "pool" ) ) {
+    Serial.print("mDNS responder started: http://pool.local");
   }
 }

@@ -24,9 +24,11 @@ void setup()
 	ftpSrv.begin("mike","iron");
 	// lookup reason for restart
 	resetReason.toCharArray(charBuf,resetReason.length()+1);
+	Serial.print(charBuf[9]);
+	if( charBuf[9] == 'D' ) sleeping = true;
 	diagMess(charBuf);       // restart message
 	startMillis = millis();
-	Serial.printf("boot delay: %li ms\n",startMillis-bootMillis);
+	Serial.printf("boot delay: %i ms\n",startMillis - bootMillis);
 }
 
 void loop()
@@ -53,11 +55,12 @@ void ISRwatchDog () {
 	// rejoin local network if necessary
 	if (WiFi.status() != WL_CONNECTED) joinNet();
 	// check for scan failure
-	if (millis() - startMillis > 65000UL) {
-		diagMess("Prometheus 1m scan fail");
+	if (millis() - lastScan > 330000UL) {
+		diagMess("Prometheus 5m scan fail");
 	  fd.close();
 		fe.close();
-    ESP.deepSleep(300e6); 
+		if (battery) ESP.deepSleep(300e6); 
+    ESP.restart();
 	}  
   interrupts();
 }

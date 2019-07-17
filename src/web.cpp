@@ -3,15 +3,17 @@
 #include <ESP8266WebServer.h>
 #include "functions.h"
 
-extern char longStr[],fileSizeStr[],fileName[],userText[],charBuf[];
+extern char longStr[], fileSizeStr[], fileName[], userText[], charBuf[];
 extern ESP8266WebServer server;
 extern uint32_t fileSize, lastScan;
 extern File fd, fe;
 extern uint16_t longStrLen;
 extern float celsius[];
+extern bool battery, sleeping;
+
 
 void handleMetrics() {
-  longStr[0]='\0';
+  longStr[0] = '\0';
   addCstring("# TYPE spPoolTemp guage" );
   addCstring("\nspPoolTemp ");
   addCstring(f2s2(celsius[0]));
@@ -26,11 +28,20 @@ void handleMetrics() {
   addCstring(f2s2(-WiFi.RSSI()));
   addCstring( "\n" );
   server.send ( 200, "text/plain", longStr );
-  // shutdown for 5 minutes
-  Serial.printf("scanned at %s\n",timeStamp());
-  fd.close();
-  fe.close();
-  ESP.deepSleep(305e6); 
+
+  lastScan = millis();
+  if (battery) {
+    //  if previously sleeping shutdown for 5 minutes
+    if ( sleeping ) {
+      fd.close();
+      fe.close();
+      ESP.deepSleep(305e6);
+    } 
+    else {  // else wait for next scan before going to sleep
+      sleeping = true;
+      Serial.println("first scan");
+    } 
+  }
 }
 
 void handleNotFound() {

@@ -7,12 +7,12 @@ extern int16_t sampleCount;
 extern File fd,fe;
 
 void minProc() {
-	if (sampleCount < 10) return;
+//	if (sampleCount < 10) return;
   oldMin = minute();
 //	pvMinuteAvg = pvSum / sampleCount;
 //  pvMinuteMax = pvMax;
 //  pvMinuteMin = pvMin;
-  // flush fault files
+// flush fault files
   fd.flush();
   fe.flush();
 

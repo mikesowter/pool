@@ -8,8 +8,6 @@ unsigned long getTime();
 extern uint8_t oldMin,oldQtr,oldHour,oldDay,oldMonth;
 extern uint32_t t0, startMillis;
 extern char todayName[], charBuf[];
-extern bool dayStored;
-extern double sumEnergyToday,prevEnergyToday;
 
 void setupTime() {
   setTime(getTime());
@@ -35,8 +33,5 @@ void dayCheck() {
   if (oldDay == day()) return;
   delay(2000);   //wait 2s to clear midNight reliably
   setupTime();
-  dayStored = false;
-  prevEnergyToday = 0.0;
-  sumEnergyToday = 0.0;
   return;
 }
