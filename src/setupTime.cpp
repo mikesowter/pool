@@ -20,10 +20,6 @@ void setupTime() {
   oldDay = day();
   oldMonth = month();
 
-  strcpy(charBuf,dateStamp());
-  strcat(charBuf," ");
-  strcat(charBuf,timeStamp());
-  Serial.println(charBuf);
   strcpy(todayName,"/pt");
   strcat(todayName,dateStamp());
   strcat(todayName,".csv");

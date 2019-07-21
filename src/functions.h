@@ -52,3 +52,5 @@ uint8_t openFile(const char* s);
 void writeTemps();
 // scan1Wire
 void scan1Wire();
+// minProc
+void minProc();

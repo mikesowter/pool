@@ -7,7 +7,7 @@ void setup()
 {
 	bootMillis = millis();
 	Serial.begin(115200);
-	Serial.println("\n\rPooltemps Rev 1.1 20190708");
+	Serial.println("\n\rPooltemps Rev 1.1 20190721");
 	// join local network and internet
 	joinNet();
 	// setup over the air updates
@@ -24,7 +24,6 @@ void setup()
 	ftpSrv.begin("mike","iron");
 	// lookup reason for restart
 	resetReason.toCharArray(charBuf,resetReason.length()+1);
-	Serial.print(charBuf[9]);
 	if( charBuf[9] == 'D' ) sleeping = true;
 	diagMess(charBuf);       // restart message
 	startMillis = millis();
@@ -35,12 +34,12 @@ void loop()
 {
 	// scan 1-wire temperature probes
 	scan1Wire();
-	// update day file
-	storeData();
+	// periodic processing
+	if ( minute() != oldMin ) minProc();
 	// reset watchdog
 	watchDog=0;
 	// check for activity
-	watchWait(60000UL);
+	watchWait(20000UL);
 }
 
 void ISRwatchDog () {

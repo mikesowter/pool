@@ -12,13 +12,13 @@ extern File fd,fe;
 
 char d2Str[] = "12";
 char d8Str[] = "12345.78";
+char fltStr[12];
 
 void diagMess(const char* mess) {
   fd.print(dateStamp());
   fd.print(" ");
   fd.print(timeStamp());
-  Serial.print(timeStamp());
-  Serial.println(mess);
+  Serial.printf("diag: %s %s \n",timeStamp(),mess);
   fd.println(mess);
 }
 
@@ -77,7 +77,6 @@ char* i2sd(uint8_t b) {
 
 // convert float into char string ddddd.dd
 char* f2s2(float f) {
-  char fltStr[12];
   dtostrf((double)f, 0, 2, fltStr);
   return fltStr;
 }

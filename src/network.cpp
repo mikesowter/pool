@@ -33,14 +33,7 @@ void joinNet() {
 
   while (WiFi.status() != WL_CONNECTED) delay(1);
  
-  Serial.println("");
-  Serial.println("local IP address: ");
-  localIP=WiFi.localIP();
-  Serial.print(localIP);
-  long rssi = WiFi.RSSI();
-  Serial.print("   signal strength: ");
-  Serial.print(rssi);
-  Serial.println(" dBm");
+  Serial.printf("\nIP: %u.%u.%u.%u signal: %i dBm\n",ip[0],ip[1],ip[2],ip[3],WiFi.RSSI());
 
   udp.begin(localPort);
   // Resolve servers
