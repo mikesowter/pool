@@ -38,8 +38,11 @@ void loop()
 	if ( minute() != oldMin ) minProc();
 	// reset watchdog
 	watchDog=0;
-	// check for activity
+	// check for admin activity
 	watchWait(20000UL);
+	// read battery voltage
+	batteryVolts = 4.11/1024.0 * analogRead(A0);
+
 }
 
 void ISRwatchDog () {

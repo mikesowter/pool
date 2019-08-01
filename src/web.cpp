@@ -8,7 +8,7 @@ extern ESP8266WebServer server;
 extern uint32_t fileSize, lastScan;
 extern File fd, fe;
 extern uint16_t longStrLen;
-extern float celsius[];
+extern float celsius[], batteryVolts;
 extern bool battery, sleeping;
 
 
@@ -23,6 +23,9 @@ void handleMetrics() {
   addCstring("\n# TYPE spAirTemp guage" );
   addCstring("\nspAirTemp ");
   addCstring(f2s2(celsius[2]));
+  addCstring("\n# TYPE spBattery guage" );
+  addCstring("\nspBattery ");
+  addCstring(f2s2(batteryVolts));
   addCstring("\n# TYPE spWifiSignal guage" );
   addCstring("\nspWifiSignal ");
   addCstring(f2s2(-WiFi.RSSI()));

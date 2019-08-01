@@ -43,7 +43,7 @@ char timeStr[10];
 
 uint8_t oldMin, oldQtr, oldHour, oldDay, oldMonth;
 int16_t sampleCount=0;
-float frQtrMax,frQtrMin;
+float ptQtrMax, ptQtrMin, batteryVolts;
 float celsius[3], sumTemp[5];
 uint32_t fileSize, secsSinceRestart;
 uint32_t t0, t1, bootMillis, startMillis, lastScan;
