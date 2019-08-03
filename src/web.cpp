@@ -73,7 +73,12 @@ void handleNotFound() {
     strcpy(charBuf,"<!DOCTYPE html><html><head><HR>Error Messages deleted<HR></head></html>");
     server.send ( 200, "text/html", charBuf );
   }
-  else {
+    else if (strncmp(userText,"/reset",6)==0) {
+    fd.close();
+		fe.close();
+    ESP.restart();
+  }
+    else {
     Serial.print(timeStamp());
     Serial.print(userText);
     Serial.println(" is not a valid option");
