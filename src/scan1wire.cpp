@@ -10,19 +10,14 @@ uint8_t data[12], addr[8], probe, numProbes = 3;
 uint16_t numSamp[3], knownAddr[3] = {0xFFAF,0xFF83,0xFFDB};
 
 extern float celsius[3], sumTemp[5];
+extern char charBuf[];
 
 void scan1Wire() {
   while ( ds.search(addr)) {
 
-    if ( OneWire::crc8( addr, 7) != addr[7]) {
+    if ( OneWire::crc8(addr, 7) != addr[7] ) {
       fe=SPIFFS.open("/scanErrs.txt","a");
-      fe.print("\naddr = ");
-      for ( int i = 0; i < 3; i++) {
-        if (addr[i]<16) fe.print("0");
-        fe.print(addr[i], HEX);
-        fe.print(" ");
-      }
-      fe.print("\nbad CRC!\n");
+      fe.printf("\n%s %s addr = %4X bad CRC!\n",dateStamp(),timeStamp(),addr);
       fe.close();
       return;
     }
@@ -60,19 +55,19 @@ void scan1Wire() {
     //  check for unknown interface
     else if ( addr[0] != 0x28) {
       uint8_t cfg = (data[4] & 0x60);
-      Serial.print("\n\rnew probe: ");
-      Serial.print(cfg,HEX);
-      // at lower res, the low bits are undefined, so let's zero them
+      sprintf(charBuf,"\n\rnew probe: %X",cfg);
+      diagMess(charBuf);
+       // at lower res, the low bits are undefined, so let's zero them
       if (cfg == 0x00) raw = raw & ~7;  // 9 bit resolution, 93.75 ms
       else if (cfg == 0x20) raw = raw & ~3; // 10 bit res, 187.5 ms
       else if (cfg == 0x40) raw = raw & ~1; // 11 bit res, 375 ms
       // no else - do nothing if 12 bit
     }
-    celsius[probe] = (float)raw / 16.0;
-    Serial.print(celsius[probe]);
-
-    sumTemp[probe] += celsius[probe];
-    numSamp[probe] += 1;
+    if ( raw > -160 && raw < 800 ) {    // don't use unreasonable values
+      celsius[probe] = (float)raw / 16.0;
+      sumTemp[probe] += celsius[probe];
+      numSamp[probe] += 1;
+    }
   }
 ds.reset_search();
 return;
