@@ -29,7 +29,7 @@ bool invReply = false;												// inverter has replied
 bool firstPass = true;												// reset after inverter first replies
 bool dayStored = false;												// days energy stored in totalNRG.csv
 bool sleeping = false;                        // test for deepsleep system restart
-bool battery = false;                         // switch to enable sleep if required
+bool onBattery = true;                        // switch to enable sleep if required
 
 char fileName[] = "/XXyymmdd.csv";
 char fileSizeStr[10];

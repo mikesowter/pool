@@ -1,4 +1,5 @@
 // battery powered, intermittent monitor for swimming pool
+// wakes before the quarter hour, waits for scan, then sleeps
 
 #include "main.h"
 #include "functions.h"
@@ -7,7 +8,7 @@ void setup()
 {
 	bootMillis = millis();
 	Serial.begin(115200);
-	Serial.println("\n\rPooltemps Rev 1.1 20190721");
+	Serial.println("\n\rPooltemps Rev 1.2 20190806");
 	// join local network and internet
 	joinNet();
 	// setup over the air updates
@@ -41,8 +42,7 @@ void loop()
 	// check for admin activity
 	watchWait(20000UL);
 	// read battery voltage
-	batteryVolts = 4.11/1024.0 * analogRead(A0);
-
+	batteryVolts = .00416 * analogRead(A0);
 }
 
 void ISRwatchDog () {
@@ -57,11 +57,10 @@ void ISRwatchDog () {
 	// rejoin local network if necessary
 	if (WiFi.status() != WL_CONNECTED) joinNet();
 	// check for scan failure
-	if (millis() - lastScan > 330000UL) {
-		diagMess("Prometheus 5m scan fail");
+	if (millis() - lastScan > 930000UL) {
+		diagMess("Prometheus 15m scan fail");
 	  fd.close();
 		fe.close();
-		if (battery) ESP.deepSleep(300e6); 
     ESP.restart();
 	}  
   interrupts();
