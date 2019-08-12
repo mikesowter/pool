@@ -25,8 +25,14 @@ void setup()
 	ftpSrv.begin("mike","iron");
 	// lookup reason for restart
 	resetReason.toCharArray(charBuf,resetReason.length()+1);
-	if( charBuf[9] == 'D' ) sleeping = true;
 	diagMess(charBuf);       // restart message
+	resetDetail.toCharArray(charBuf,resetDetail.length()+1);
+	if ( charBuf[16] != '0' )	{				// if fatal exception
+		diagMess(charBuf);       				// usually 3 seconds into sleep
+		ESP.deepSleep(550000000UL);			// sleep until the next scan
+	}
+	startMillis = millis();
+	Serial.printf("boot delay: %i ms\n",startMillis-bootMillis);
 	startMillis = millis();
 	Serial.printf("boot delay: %i ms\n",startMillis - bootMillis);
 }
@@ -35,8 +41,8 @@ void loop()
 {
 	// scan 1-wire temperature probes
 	scan1Wire();
-	// periodic processing
-	if ( minute() != oldMin ) minProc();
+	// update day if required
+	if ( !onBattery ) dayCheck();
 	// reset watchdog
 	watchDog=0;
 	// check for admin activity
@@ -57,8 +63,8 @@ void ISRwatchDog () {
 	// rejoin local network if necessary
 	if (WiFi.status() != WL_CONNECTED) joinNet();
 	// check for scan failure
-	if (millis() - lastScan > 930000UL) {
-		diagMess("Prometheus 15m scan fail");
+	if (millis() - lastScan > 630000UL) {
+		diagMess("Prometheus 10m scan fail");
 	  fd.close();
 		fe.close();
     ESP.restart();

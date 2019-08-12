@@ -5,16 +5,16 @@
 
 extern char longStr[], fileSizeStr[], fileName[], userText[], charBuf[];
 extern ESP8266WebServer server;
-extern uint32_t fileSize, lastScan;
+extern uint32_t fileSize, lastScan, bootMillis;
 extern File fd, fe;
 extern uint16_t longStrLen;
 extern float celsius[], batteryVolts;
-extern bool onBattery, sleeping;
+extern bool onBattery;
 
 void gotoSleep();
 
-void handleMetrics() {
-  longStr[0] = '\0';
+void handleRoot() {
+  longStr[0]='\0';
   addCstring("# TYPE spPoolTemp guage" );
   addCstring("\nspPoolTemp ");
   addCstring(f2s2(celsius[0]));
@@ -32,8 +32,35 @@ void handleMetrics() {
   addCstring(f2s2(-WiFi.RSSI()));
   addCstring( "\n" );
   server.send ( 200, "text/plain", longStr );
+}
+
+void handleMetrics() {
+  longStr[0] = '\0';
+  addCstring("# TYPE spPoolTemp guage" );
+  addCstring("\nspPoolTemp ");
+  addCstring(f2s2(celsius[0]));
+  addCstring("\n# TYPE spPumpTemp guage" );
+  addCstring("\nspPumpTemp ");
+  addCstring(f2s2(celsius[1]));
+  addCstring("\n# TYPE spAirTemp guage" );
+  addCstring("\nspAirTemp ");
+  addCstring(f2s2(celsius[2]));
+  addCstring("\n# TYPE spBattery guage" );
+  addCstring("\nspBattery ");
+  addCstring(f2s2(batteryVolts));
+  addCstring("\n# TYPE spWaitMillis guage" );
+  addCstring("\nspWaitMillis ");
+  addCstring(f2s2((float)(millis()-bootMillis)));
+  addCstring("\n# TYPE spWifiSignal guage" );
+  addCstring("\nspWifiSignal ");
+  addCstring(f2s2(-WiFi.RSSI()));
+  addCstring( "\n" );
+  server.send ( 200, "text/plain", longStr );
   lastScan = millis();
-  if ( onBattery ) gotoSleep();
+  if ( onBattery ) {
+    storeData();
+    gotoSleep();
+  }
 }
 
 void handleNotFound() {

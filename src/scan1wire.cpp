@@ -17,7 +17,7 @@ void scan1Wire() {
 
     if ( OneWire::crc8(addr, 7) != addr[7] ) {
       fe=SPIFFS.open("/scanErrs.txt","a");
-      fe.printf("\n%s %s addr = %4X bad CRC!\n",dateStamp(),timeStamp(),addr);
+      fe.printf("\n%s %s addr = %X bad CRC!\n",dateStamp(),timeStamp(),addr);
       fe.close();
       return;
     }

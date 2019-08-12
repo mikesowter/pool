@@ -9,12 +9,12 @@ char* timeStamp();
 
 extern File fh;
 extern char charBuf[],fileName[],todayName[];
-extern float celsius[];
+extern float celsius[], batteryVolts;
 
 uint8_t storeData() {
   strcpy(fileName,todayName);
   if ( !openFile("a") ) return 0;
-  fh.printf("%s %.1f,%.1f,%.1f\n",timeStamp(),celsius[0],celsius[1],celsius[2]);
+  fh.printf("%s,,%.1f,%.1f,%.1f,%.3f\n",timeStamp(),celsius[0],celsius[1],celsius[2],batteryVolts);
   fh.close();
   return 1;
 }
