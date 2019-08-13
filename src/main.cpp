@@ -29,7 +29,7 @@ void setup()
 	resetDetail.toCharArray(charBuf,resetDetail.length()+1);
 	if ( charBuf[16] != '0' )	{				// if fatal exception
 		diagMess(charBuf);       				// usually 3 seconds into sleep
-		ESP.deepSleep(550000000UL);			// sleep until the next scan
+		ESP.deepSleep(600000000UL);			// sleep until the next scan
 	}
 	startMillis = millis();
 	Serial.printf("boot delay: %i ms\n",startMillis-bootMillis);

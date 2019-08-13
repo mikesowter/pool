@@ -8,7 +8,7 @@ extern File fd,fe;
 void gotoSleep() {
 {
   diagMess("to sleep...");
-  uint32_t microsToSleep = 550 * 1000000;
+  uint32_t microsToSleep = 620 * 1000000;
   fd.close();
   fe.close();
   ESP.deepSleep(microsToSleep);
