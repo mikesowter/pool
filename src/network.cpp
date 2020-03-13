@@ -3,13 +3,14 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include <WiFiUdp.h>
+#include <TimeLib.h>
 
 void sendNTPrequest(IPAddress& address);
 unsigned long getNTPreply();
 void diagMess(const char* mess);
 
 IPAddress localIP,ausTimeServerIP;
-IPAddress localTimeServerIP(192, 168, 1, 10);
+IPAddress localTimeServerIP(192, 168, 1, 6);
 IPAddress ip(192, 168, 1, 51);
 IPAddress gateway(192, 168, 1, 1);
 IPAddress subnet(255, 255, 255, 0);

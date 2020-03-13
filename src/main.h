@@ -1,6 +1,7 @@
 // an attempt at a generic include file, with minimal globals
 
 #include <arduino.h>
+#include <wire.h>
 #include <SoftwareSerial.h>
 #include <TimeLib.h>
 #include <ESP8266WiFi.h>
@@ -39,6 +40,7 @@ char dateStr[7];
 char timeStr[10];
 
 uint8_t oldMin, oldQtr, oldHour, oldDay, oldMonth;
+uint8_t reply[12];
 float batteryVolts;
 float celsius[3], sumTemp[5];
 uint32_t fileSize, secsSinceRestart;

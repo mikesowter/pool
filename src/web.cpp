@@ -59,7 +59,7 @@ void handleMetrics() {
   lastScan = millis();
   if ( onBattery ) {
     storeData();
-    gotoSleep();
+  //  gotoSleep();
   }
 }
 

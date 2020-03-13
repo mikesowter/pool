@@ -1,6 +1,3 @@
-// battery powered, intermittent monitor for swimming pool
-// wakes before the quarter hour, waits for scan, then sleeps
-
 #include "main.h"
 #include "functions.h"
 
@@ -11,8 +8,10 @@ void setup()
 	Serial.println("\n\rPooltemps Rev 1.2 20190806");
 	// join local network and internet
 	joinNet();
-	// setup over the air updates
-	init_OTA();
+  // setup connection to nano
+	Wire.begin();
+  // setup over the air updates
+  init_OTA();
 	// setup watch dog
 	secondTick.attach(1,ISRwatchDog);
 	// Set epoch and timers
@@ -41,6 +40,8 @@ void loop()
 {
 	// scan 1-wire temperature probes
 	scan1Wire();
+  // scan 2-wire line to nano
+  scan2Wire();
 	// update day if required
 	if ( !onBattery ) dayCheck();
 	// reset watchdog

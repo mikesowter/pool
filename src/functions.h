@@ -50,7 +50,7 @@ void setupSPIFFS ();
 uint8_t storeData();
 uint8_t openFile(const char* s);
 void writeTemps();
-// scan1Wire
 void scan1Wire();
-// minProc
+void scan2Wire();
 void minProc();
+void readnano();
