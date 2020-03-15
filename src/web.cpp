@@ -10,29 +10,10 @@ extern File fd, fe;
 extern uint16_t longStrLen;
 extern float celsius[], batteryVolts;
 extern bool onBattery;
+extern float level,rain_t,rain_y,rain_m;
+extern uint8_t chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 
 void gotoSleep();
-
-void handleRoot() {
-  longStr[0]='\0';
-  addCstring("# TYPE spPoolTemp guage" );
-  addCstring("\nspPoolTemp ");
-  addCstring(f2s2(celsius[0]));
-  addCstring("\n# TYPE spPumpTemp guage" );
-  addCstring("\nspPumpTemp ");
-  addCstring(f2s2(celsius[1]));
-  addCstring("\n# TYPE spAirTemp guage" );
-  addCstring("\nspAirTemp ");
-  addCstring(f2s2(celsius[2]));
-  addCstring("\n# TYPE spBattery guage" );
-  addCstring("\nspBattery ");
-  addCstring(f2s2(batteryVolts));
-  addCstring("\n# TYPE spWifiSignal guage" );
-  addCstring("\nspWifiSignal ");
-  addCstring(f2s2(-WiFi.RSSI()));
-  addCstring( "\n" );
-  server.send ( 200, "text/plain", longStr );
-}
 
 void handleMetrics() {
   longStr[0] = '\0';
@@ -45,12 +26,46 @@ void handleMetrics() {
   addCstring("\n# TYPE spAirTemp guage" );
   addCstring("\nspAirTemp ");
   addCstring(f2s2(celsius[2]));
-  addCstring("\n# TYPE spBattery guage" );
-  addCstring("\nspBattery ");
-  addCstring(f2s2(batteryVolts));
-  addCstring("\n# TYPE spWaitMillis guage" );
-  addCstring("\nspWaitMillis ");
-  addCstring(f2s2((float)(millis()-bootMillis)));
+
+  addCstring("\n# TYPE spPoolLevel guage" );
+  addCstring("\nspPoolLevel ");
+  addCstring(f2s2(level));
+  addCstring("\n# TYPE spRain_t guage" );
+  addCstring("\nspRain_t ");
+  addCstring(f2s2(rain_t));
+  addCstring("\n# TYPE spRain_y guage" );
+  addCstring("\nspRain_y ");
+  addCstring(f2s2(rain_y));
+  addCstring("\n# TYPE spRain_m guage" );
+  addCstring("\nspRain_m ");
+  addCstring(f2s2(rain_m));
+  addCstring("\n# TYPE spClmin1 guage" );
+  addCstring("\nspClmin1 ");
+  addCstring(i2sd(chlo1min));
+  addCstring("\n# TYPE spClmax1 guage" );
+  addCstring("\nspClmax1 ");
+  addCstring(i2sd(chlo1max));
+  addCstring("\n# TYPE spClrms1 guage" );
+  addCstring("\nspClrms1 ");
+  addCstring(i2sd(chlo1rms));
+  addCstring("\n# TYPE spClmin2 guage" );
+  addCstring("\nspClmin2 ");
+  addCstring(i2sd(chlo2min));
+  addCstring("\n# TYPE spClmax2 guage" );
+  addCstring("\nspClmax2 ");
+  addCstring(i2sd(chlo2max));
+  addCstring("\n# TYPE spClrms2 guage" );
+  addCstring("\nspClrms2 ");
+  addCstring(i2sd(chlo2rms));
+
+  if ( onBattery ) {
+    addCstring("\n# TYPE spBattery guage" );
+    addCstring("\nspBattery ");
+    addCstring(f2s2(batteryVolts));
+    addCstring("\n# TYPE spWaitMillis guage" );
+    addCstring("\nspWaitMillis ");
+    addCstring(f2s2((float)(millis()-bootMillis)));
+  }
   addCstring("\n# TYPE spWifiSignal guage" );
   addCstring("\nspWifiSignal ");
   addCstring(f2s2(-WiFi.RSSI()));
@@ -59,7 +74,7 @@ void handleMetrics() {
   lastScan = millis();
   if ( onBattery ) {
     storeData();
-  //  gotoSleep();
+    gotoSleep();
   }
 }
 

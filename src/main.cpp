@@ -5,7 +5,7 @@ void setup()
 {
 	bootMillis = millis();
 	Serial.begin(115200);
-	Serial.println("\n\rPooltemps Rev 1.2 20190806");
+	Serial.println("\n\rPool Master Rev 1.3 20200314");
 	// join local network and internet
 	joinNet();
   // setup connection to nano
@@ -26,18 +26,11 @@ void setup()
 	resetReason.toCharArray(charBuf,resetReason.length()+1);
 	diagMess(charBuf);       // restart message
 	resetDetail.toCharArray(charBuf,resetDetail.length()+1);
-	if ( charBuf[16] != '0' )	{				// if fatal exception
-		diagMess(charBuf);       				// usually 3 seconds into sleep
-		ESP.deepSleep(600000000UL);			// sleep until the next scan
-	}
-	startMillis = millis();
-	Serial.printf("boot delay: %i ms\n",startMillis-bootMillis);
-	startMillis = millis();
-	Serial.printf("boot delay: %i ms\n",startMillis - bootMillis);
 }
 
 void loop()
 {
+  Serial.printf("\n %s ",timeStamp());
 	// scan 1-wire temperature probes
 	scan1Wire();
   // scan 2-wire line to nano
@@ -47,7 +40,7 @@ void loop()
 	// reset watchdog
 	watchDog=0;
 	// check for admin activity
-	watchWait(20000UL);
+	watchWait(5000UL);
 	// read battery voltage
 	batteryVolts = .00416 * analogRead(A0);
 }

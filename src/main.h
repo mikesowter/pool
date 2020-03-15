@@ -27,7 +27,7 @@ Ticker secondTick;
 volatile int watchDog = 0;
 OneWire  ds(12);                // on GPIO12 - pin D6 on d1-mini
 
-bool onBattery = true;          // switch to enable sleep if required
+bool onBattery = false;          // switch to enable sleep if required
 
 char fileName[] = "/XXyymmdd.csv";
 char fileSizeStr[10];
@@ -41,6 +41,8 @@ char timeStr[10];
 
 uint8_t oldMin, oldQtr, oldHour, oldDay, oldMonth;
 uint8_t reply[12];
+uint8_t chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
+float level,rain_t,rain_y=0.0,rain_m=0.0;   // rain today since midnight, yesterday, this month
 float batteryVolts;
 float celsius[3], sumTemp[5];
 uint32_t fileSize, secsSinceRestart;

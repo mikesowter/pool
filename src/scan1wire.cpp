@@ -67,6 +67,7 @@ void scan1Wire() {
       celsius[probe] = (float)raw / 16.0;
       sumTemp[probe] += celsius[probe];
       numSamp[probe] += 1;
+      Serial.printf("temp%d: %0.1f ",probe,celsius[probe]);
     }
   }
 ds.reset_search();
