@@ -10,6 +10,9 @@ void setup()
 	joinNet();
   // setup connection to nano
 	Wire.begin();
+  // setup rain resets
+  pinMode(R_D, OUTPUT);
+  pinMode(R_M, OUTPUT);
   // setup over the air updates
   init_OTA();
 	// setup watch dog

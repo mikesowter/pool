@@ -1,6 +1,9 @@
 #include <arduino.h>
 #include <TimeLib.h>
 
+#define R_D 0 // D3
+#define R_M 2 // D4
+
 char* dateStamp();
 char* timeStamp();
 unsigned long getTime();
@@ -21,7 +24,6 @@ void setupTime() {
   oldHour = hour();
   oldDay = day();
   oldMonth = month();
-
   strcpy(todayName,"/pt");
   strcat(todayName,dateStamp());
   strcat(todayName,".csv");
@@ -29,10 +31,18 @@ void setupTime() {
 
 void dayCheck() {
   if (oldDay == day()) return;
-  delay(2000);   //wait 2s to clear midNight reliably
-  setupTime();
   rain_y = rain_t;
   rain_m += rain_t;
   rain_t = 0.0;
+  digitalWrite(R_D,1);        // reset day in slave
+  delay(1);
+  digitalWrite(R_D,0);
+  if (oldMonth != month()) {
+    rain_m = 0.0;
+    digitalWrite(R_M,1);      // reset month in slave
+    delay(1);
+    digitalWrite(R_M,0);
+  }
+  setupTime();
   return;
 }

@@ -41,22 +41,22 @@ void handleMetrics() {
   addCstring(f2s2(rain_m));
   addCstring("\n# TYPE spClmin1 guage" );
   addCstring("\nspClmin1 ");
-  addCstring(i2sd(chlo1min));
+  addCstring(f2s2(chlo1min));
   addCstring("\n# TYPE spClmax1 guage" );
   addCstring("\nspClmax1 ");
-  addCstring(i2sd(chlo1max));
+  addCstring(f2s2(chlo1max));
   addCstring("\n# TYPE spClrms1 guage" );
   addCstring("\nspClrms1 ");
-  addCstring(i2sd(chlo1rms));
+  addCstring(f2s2(chlo1rms));
   addCstring("\n# TYPE spClmin2 guage" );
   addCstring("\nspClmin2 ");
-  addCstring(i2sd(chlo2min));
+  addCstring(f2s2(chlo2min));
   addCstring("\n# TYPE spClmax2 guage" );
   addCstring("\nspClmax2 ");
-  addCstring(i2sd(chlo2max));
+  addCstring(f2s2(chlo2max));
   addCstring("\n# TYPE spClrms2 guage" );
   addCstring("\nspClrms2 ");
-  addCstring(i2sd(chlo2rms));
+  addCstring(f2s2(chlo2rms));
 
   if ( onBattery ) {
     addCstring("\n# TYPE spBattery guage" );

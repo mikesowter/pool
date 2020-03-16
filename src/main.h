@@ -15,6 +15,11 @@ extern "C" {
 #include "user_interface.h"
 }
 
+#define SCL 5 // D1
+#define SDA 4 // D2
+#define R_D 0 // D3
+#define R_M 2 // D4
+
 String resetReason = "restart: " + ESP.getResetReason();
 String resetDetail = ESP.getResetInfo();
 
@@ -41,7 +46,7 @@ char timeStr[10];
 
 uint8_t oldMin, oldQtr, oldHour, oldDay, oldMonth;
 uint8_t reply[12];
-uint8_t chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
+float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 float level,rain_t,rain_y=0.0,rain_m=0.0;   // rain today since midnight, yesterday, this month
 float batteryVolts;
 float celsius[3], sumTemp[5];

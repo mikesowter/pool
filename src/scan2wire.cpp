@@ -1,8 +1,9 @@
 #include <arduino.h>
 #include <wire.h>
 
-extern uint8_t chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms,reply[];
+extern uint8_t reply[];
 extern float level,rain_t,rain_y,rain_m; 
+extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 
 void scan2Wire() {
   Wire.requestFrom(8, 12);    // request 6 bytes from slave device #8
@@ -15,14 +16,14 @@ void scan2Wire() {
 
   if (reply[0]=='L') {
     level = float(256*reply[1]+reply[2])/100.0;
-    chlo1min = reply[3];
-    chlo1max = reply[4];
-    chlo1rms = reply[5];
-    chlo2min = reply[6];
-    chlo2max = reply[7];
-    chlo2rms = reply[8];
+    chlo1min = (float)reply[3];
+    chlo1max = (float)reply[4];
+    chlo1rms = (float)reply[5];
+    chlo2min = (float)reply[6];
+    chlo2max = (float)reply[7];
+    chlo2rms = (float)reply[8];
     rain_t = float(256*reply[9]+reply[10]-10000)*0.83 - rain_m;
   }
-    Serial.printf("Level: %.1f Chlor1: %d Chlor2: %d Rain: %.1f",level,chlo1rms,chlo2rms,rain_t);
+    Serial.printf("Level: %.1f Chlor1: %.1f Chlor2: %.1f Rain: %.1f",level,chlo1rms,chlo2rms,rain_t);
 }
 
