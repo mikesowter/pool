@@ -45,7 +45,7 @@ char dateStr[7];
 char timeStr[10];
 
 uint8_t oldMin, oldQtr, oldHour, oldDay, oldMonth;
-uint8_t reply[12];
+uint8_t reply[270];
 float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 float level,rain_t,rain_y=0.0,rain_m=0.0;   // rain today since midnight, yesterday, this month
 float batteryVolts;

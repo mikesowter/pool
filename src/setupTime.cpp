@@ -35,14 +35,14 @@ void dayCheck() {
   rain_m += rain_t;
   rain_t = 0.0;
   digitalWrite(R_D,1);        // reset day in slave
-  delay(1);
+  delay(1000);
   digitalWrite(R_D,0);
-  if (oldMonth != month()) {
+/*  if (oldMonth != month()) {
     rain_m = 0.0;
     digitalWrite(R_M,1);      // reset month in slave
-    delay(1);
+    delay(1000);
     digitalWrite(R_M,0);
-  }
+  } */
   setupTime();
   return;
 }

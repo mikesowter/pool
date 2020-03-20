@@ -11,7 +11,7 @@ extern uint16_t longStrLen;
 extern float celsius[], batteryVolts;
 extern bool onBattery;
 extern float level,rain_t,rain_y,rain_m;
-extern uint8_t chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
+extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 
 void gotoSleep();
 
@@ -29,7 +29,7 @@ void handleMetrics() {
 
   addCstring("\n# TYPE spPoolLevel guage" );
   addCstring("\nspPoolLevel ");
-  addCstring(f2s2(level));
+  addCstring(f2s2(-level));
   addCstring("\n# TYPE spRain_t guage" );
   addCstring("\nspRain_t ");
   addCstring(f2s2(rain_t));

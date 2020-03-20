@@ -33,8 +33,6 @@ void setup()
 
 void loop()
 {
-  Serial.printf("\n %s ",timeStamp());
-	// scan 1-wire temperature probes
 	scan1Wire();
   // scan 2-wire line to nano
   scan2Wire();
@@ -43,7 +41,7 @@ void loop()
 	// reset watchdog
 	watchDog=0;
 	// check for admin activity
-	watchWait(5000UL);
+	watchWait(20000UL);
 	// read battery voltage
 	batteryVolts = .00416 * analogRead(A0);
 }
@@ -71,8 +69,8 @@ void ISRwatchDog () {
 
 void watchWait(uint32_t timer) {
   t0 = millis();
-  while (millis()-t0 < timer) {  // wait for timeout
-    if (t0>millis()) t0=millis(); // check for wrap around
+  while ( millis()-t0 < timer ) {  // wait for timeout
+    if ( t0 > millis() ) t0 = millis(); // check for wrap around
     yield();
     //  check for web requests
     server.handleClient();
