@@ -19,7 +19,7 @@ void diagMess(const char* mess) {
   fd.print(dateStamp());
   fd.print(" ");
   fd.print(timeStamp());
-//  Serial.printf("diag: %s %s \n",timeStamp(),mess);
+  Serial.printf("diag: %s %s \n",timeStamp(),mess);
   fd.println(mess);
 }
 

@@ -6,15 +6,19 @@ char* i2sh(uint8_t b);
 extern uint8_t reply[];
 extern float level,rain_t,rain_y,rain_m; 
 extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
-char mess[50]="";
+char mess[800]="";
 
 void scan2Wire() {
   uint32_t timer = millis();
-  Wire.requestFrom(8, 270);    // request 270 bytes from slave device #8
-  uint8_t b = 0;
+  Wire.requestFrom(8, 32);    // request 200 bytes from slave device #8
+  uint16_t b = 0;
   strcpy(mess,"");
+  delay(100);
   while ( Wire.available() ) {
     uint8_t c = Wire.read();  // receive a byte as character
+    if ( c < 16 ) Serial.print("0");
+    Serial.print(c,HEX);
+    Serial.print(" ");
     reply[b++] = c;
     strcat(mess,i2sh(c));
     strcat(mess," ");
@@ -22,7 +26,10 @@ void scan2Wire() {
       diagMess("scan2Wire time-out");
       break;
     }
+    yield();
+
   }
+  Serial.printf("\nbytes Rx: %d\n",b);
 
   diagMess(mess);
   if (reply[0]=='L') {
@@ -39,7 +46,8 @@ void scan2Wire() {
     chlo2rms = (float)reply[8];
     rain_t = float(256*reply[9]+reply[10])*0.83 - rain_m;
   }
-    sprintf(mess,"Level: %.1f C1min: %.1f C1max: %.1f C1rms: %.1f Rain: %.1f",level,chlo1min,chlo1max,chlo1rms,rain_t);
-    diagMess(mess);
+  else diagMess("no L, no L");
+//    sprintf(mess,"Level: %.1f C1min: %.1f C1max: %.1f C1rms: %.1f Rain: %.1f",level,chlo1min,chlo1max,chlo1rms,rain_t);
+//    diagMess(mess);
 }
 

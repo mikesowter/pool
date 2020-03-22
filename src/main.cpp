@@ -8,11 +8,11 @@ void setup()
 	Serial.println("\n\rPool Master Rev 1.3 20200314");
 	// join local network and internet
 	joinNet();
-  // setup connection to nano
+  // setup as I2C master
 	Wire.begin();
-  // setup rain resets
+  Wire.setClock(80000UL);
+  // setup rain reset
   pinMode(R_D, OUTPUT);
-  pinMode(R_M, OUTPUT);
   // setup over the air updates
   init_OTA();
 	// setup watch dog
@@ -48,7 +48,7 @@ void loop()
 
 void ISRwatchDog () {
   noInterrupts();
-  watchDog++;
+  watchDog++; 
   if (watchDog >= 120) {
     errMess("watchDog 120s");
     fd.close();
