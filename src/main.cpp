@@ -5,14 +5,15 @@ void setup()
 {
 	bootMillis = millis();
 	Serial.begin(115200);
-	Serial.println("\n\rPool Master Rev 1.3 20200314");
+	Serial.println("\n\rPool Master Rev 1.4 20200322");
 	// join local network and internet
 	joinNet();
   // setup as I2C master
 	Wire.begin();
-  Wire.setClock(80000UL);
-  // setup rain reset
+  Wire.setClock(100000UL);
+  // setup rain reset & LED
   pinMode(R_D, OUTPUT);
+  pinMode(LEDPin, OUTPUT);
   // setup over the air updates
   init_OTA();
 	// setup watch dog
@@ -27,8 +28,9 @@ void setup()
 	ftpSrv.begin("mike","iron");
 	// lookup reason for restart
 	resetReason.toCharArray(charBuf,resetReason.length()+1);
-	diagMess(charBuf);       // restart message
+	errMess(charBuf);       // restart message
 	resetDetail.toCharArray(charBuf,resetDetail.length()+1);
+  if ( charBuf[16] != '0' )	errMess(charBuf);       		
 }
 
 void loop()
@@ -41,7 +43,7 @@ void loop()
 	// reset watchdog
 	watchDog=0;
 	// check for admin activity
-	watchWait(20000UL);
+	watchWait(1000UL);
 	// read battery voltage
 	batteryVolts = .00416 * analogRead(A0);
 }
@@ -69,8 +71,9 @@ void ISRwatchDog () {
 
 void watchWait(uint32_t timer) {
   t0 = millis();
+  digitalWrite(LEDPin,0);
   while ( millis()-t0 < timer ) {  // wait for timeout
-    if ( t0 > millis() ) t0 = millis(); // check for wrap around
+    if ( t0 > millis() ) t0 = 0; // check for wrap around
     yield();
     //  check for web requests
     server.handleClient();
@@ -79,5 +82,6 @@ void watchWait(uint32_t timer) {
     // check for FTP request
 		ftpSrv.handleFTP();
   }
+  digitalWrite(LEDPin,1);
 }
 
