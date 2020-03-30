@@ -12,6 +12,7 @@ extern float celsius[], batteryVolts;
 extern bool onBattery;
 extern float level,rain_t,rain_y,rain_m;
 extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
+extern uint8_t reply[];
 
 void gotoSleep();
 
@@ -76,6 +77,17 @@ void handleMetrics() {
     storeData();
     gotoSleep();
   }
+}
+
+void handleWave() {
+  longStr[0] = '\0';
+  for ( int i=16;i<136;i++) {
+    addCstring(i3sd(reply[i]));
+    addCstring(",");
+    addCstring(i3sd(reply[i+120]));
+    addCstring("\n");
+  }
+  server.send ( 200, "text/plain", longStr );
 }
 
 void handleNotFound() {
