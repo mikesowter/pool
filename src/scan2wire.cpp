@@ -4,7 +4,7 @@ void diagMess(const char* mess);
 char* i2sh(uint8_t b);
 uint32_t timer;
 bool framed;
-
+extern bool reboot;
 extern uint8_t reply[];
 extern float level,rain_t,rain_y,rain_m; 
 extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
@@ -42,7 +42,12 @@ void scan2Wire() {
       if ( level == 0 ) level = -float(reading)/100.0;
       else level = 0.99*level - 0.0001*float(reading);
     }
-    rain_t = float(256*reply[3]+reply[4])*0.83 - rain_m;
+    rain_t = float(256*reply[3]+reply[4])*0.83;
+    if ( reboot ) {     // compromise, but works well later in month
+      rain_m = rain_t;
+      reboot = false;
+    } 
+    rain_t -= rain_m;
 
     chlo1min = (float)(reply[5]-127);
     chlo1max = (float)(reply[6]-127);

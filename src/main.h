@@ -33,6 +33,7 @@ volatile int watchDog = 0;
 OneWire  ds(12);                // on GPIO12 - pin D6 on d1-mini
 
 bool onBattery = false;          // switch to enable sleep if required
+bool reboot = true;
 
 char fileName[] = "/XXyymmdd.csv";
 char fileSizeStr[10];
