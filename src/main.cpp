@@ -5,7 +5,7 @@ void setup()
 {
 	bootMillis = millis();
 	Serial.begin(115200);
-	Serial.println("\n\rPool Master Rev 1.4 20200322");
+	Serial.println("\n\rPool Master Rev 1.4 20201212");
 	// join local network and internet
 	joinNet();
   // setup as I2C master
@@ -23,7 +23,7 @@ void setup()
 	// setup server responses
 	setupServer();
 	// setup file system and diag files
-	setupSPIFFS();
+	setupLittleFS();
 	// setup FTP server
 	ftpSrv.begin("mike","iron");
 	// lookup reason for restart

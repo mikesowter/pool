@@ -1,23 +1,23 @@
-#include <fs.h>
+#include <LittleFS.h>
 
 extern FSInfo fs_info;
 extern File fd,fe;
 
-void setupSPIFFS () {
+void setupLittleFS () {
 
-//   if(!SPIFFS.format()) Serial.println("SPIFFS.format failed");
+//   if(!LittleFS.format()) Serial.println("LittleFS.format failed");
 
-  if ( !SPIFFS.begin() ) {
-    if ( !SPIFFS.format() ) Serial.println("SPIFFS.format failed");
-    Serial.println("SPIFFS.begin failed");
+  if ( !LittleFS.begin() ) {
+    if ( !LittleFS.format() ) Serial.println("LittleFS.format failed");
+    Serial.println("LittleFS.begin failed");
   }
  
-  SPIFFS.info(fs_info);
+  LittleFS.info(fs_info);
   Serial.print(fs_info.totalBytes);
   Serial.println(" bytes available");
   Serial.print(fs_info.usedBytes);
   Serial.println(" bytes used:");
 
-  fd = SPIFFS.open("/diags.txt","a");
-  fe = SPIFFS.open("/errmess.txt","a");
+  fd = LittleFS.open("/diags.txt","a");
+  fe = LittleFS.open("/errmess.txt","a");
 }

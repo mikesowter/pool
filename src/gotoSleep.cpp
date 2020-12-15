@@ -1,5 +1,5 @@
 #include <arduino.h>
-#include <fs.h>
+#include <LittleFS.h>
 
 unsigned long getTime();
 void diagMess(const char* mess);

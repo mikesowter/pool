@@ -1,5 +1,5 @@
 #include <arduino.h>
-#include <fs.h>
+#include <LittleFS.h>
 
 void diagMess(const char* mess);
 char* i2sd(uint8_t b);
@@ -22,7 +22,7 @@ uint8_t storeData() {
 //----------------- open file for appending
 
 uint8_t openFile(const char* s) {
-  fh = SPIFFS.open(fileName, s);
+  fh = LittleFS.open(fileName, s);
   if (!fh) {
     strcpy(charBuf,fileName);
     strcat(charBuf," failed to open");

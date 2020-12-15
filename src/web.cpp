@@ -1,5 +1,5 @@
 #include <arduino.h>
-#include <fs.h>
+#include <LittleFS.h>
 #include <ESP8266WebServer.h>
 #include "functions.h"
 
@@ -93,7 +93,7 @@ void handleWave() {
 void handleNotFound() {
   server.uri().toCharArray(userText, 14);
 
-  if (SPIFFS.exists(userText)) {
+  if (LittleFS.exists(userText)) {
     listFile();
   }
   else if (strncmp(userText,"/favicon.ico",12)==0) {
@@ -102,16 +102,16 @@ void handleNotFound() {
   }
   else if (strncmp(userText,"/deldiags",9)==0) {
     fd.close();
-    SPIFFS.remove("/diags.txt");
-    fd = SPIFFS.open("/diags.txt", "a");
+    LittleFS.remove("/diags.txt");
+    fd = LittleFS.open("/diags.txt", "a");
     diagMess("diags deleted");
     strcpy(charBuf,"<!DOCTYPE html><html><head><HR>Diagnostics deleted<HR></head></html>");
     server.send ( 200, "text/html", charBuf );
   }
   else if (strncmp(userText,"/delerrs",8)==0) {
     fe.close();
-    SPIFFS.remove("/errmess.txt");
-    fe = SPIFFS.open("/errmess.txt", "a");
+    LittleFS.remove("/errmess.txt");
+    fe = LittleFS.open("/errmess.txt", "a");
     fe.println(dateStamp());
     strcpy(charBuf,"<!DOCTYPE html><html><head><HR>Error Messages deleted<HR></head></html>");
     server.send ( 200, "text/html", charBuf );

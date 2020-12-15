@@ -42,7 +42,7 @@ void scan2Wire() {
       if ( level == 0 ) level = -float(reading)/100.0;
       else level = 0.99*level - 0.0001*float(reading);
     }
-    rain_t = float(256*reply[3]+reply[4])*0.83;
+    rain_t = float(256*reply[3]+reply[4]);  // recalibration Dec 2020
     if ( reboot ) {     // compromise, but works well later in month
       rain_m = rain_t;
       reboot = false;

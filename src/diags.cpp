@@ -1,5 +1,5 @@
 #include <arduino.h>
-#include <fs.h>
+#include <LittleFS.h>
 #include <TimeLib.h>
 
 char* dateStamp();

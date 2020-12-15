@@ -1,6 +1,6 @@
 #include <functions.h>
 #include <OneWire.h>
-#include <fs.h>
+#include <LittleFS.h>
 #include <ESP8266WebServer.h>
 
 extern File fe;
@@ -16,7 +16,7 @@ void scan1Wire() {
   while ( ds.search(addr)) {
 
     if ( OneWire::crc8(addr, 7) != addr[7] ) {
-      fe=SPIFFS.open("/scanErrs.txt","a");
+      fe=LittleFS.open("/scanErrs.txt","a");
       fe.printf("\n%s %s addr = %X bad CRC!\n",dateStamp(),timeStamp(),addr);
       fe.close();
       return;

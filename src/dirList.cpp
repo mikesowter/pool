@@ -1,4 +1,4 @@
-#include <fs.h>
+#include <LittleFS.h>
 #include <ESP8266WebServer.h>
 #include "functions.h"
 
@@ -14,7 +14,7 @@ void handleDir() {
   ltoa(fs_info.usedBytes,fileSizeStr,10);
   addCstring(ltoa(fs_info.usedBytes,fileSizeStr,10));
 	addCstring(" bytes used:\n");
-  Dir dir = SPIFFS.openDir("/");
+  Dir dir = LittleFS.openDir("/");
   while (dir.next()) {
     dir.fileName().toCharArray(fileName, 14);
     addCstring("\n");
@@ -28,7 +28,7 @@ void handleDir() {
 }
 
 void listFile() {
-  Dir dir = SPIFFS.openDir("/");
+  Dir dir = LittleFS.openDir("/");
   while (dir.next()) {
     dir.fileName().toCharArray(fileName, 14);
     if (strncmp(fileName,userText,9)==0) {
@@ -42,7 +42,7 @@ void listFile() {
   addCstring(" size: ");
   addCstring(fileSizeStr);
   addCstring("\r\r");
-  fh = SPIFFS.open(userText, "r");
+  fh = LittleFS.open(userText, "r");
 
   if (fileSize > longStrLen) {
     fh.seek((longStrLen-100),SeekEnd);
