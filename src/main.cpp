@@ -10,6 +10,7 @@ void setup()
 	joinNet();
   // setup as I2C master
 	Wire.begin();
+  ThingSpeak.begin(client);
   Wire.setClock(100000UL);
   // setup rain reset & LED
   pinMode(R_D, OUTPUT);
@@ -23,7 +24,7 @@ void setup()
 	// setup server responses
 	setupServer();
 	// setup file system and diag files
-	setupLittleFS();
+	setupFS();
 	// setup FTP server
 	ftpSrv.begin("mike","iron");
 	// lookup reason for restart
@@ -35,11 +36,12 @@ void setup()
 
 void loop()
 {
+  // read temperatures
 	scan1Wire();
   // scan 2-wire line to nano
   scan2Wire();
-	// update day if required
-	if ( !onBattery ) dayCheck();
+	// scheduled activity
+	if ( minute() != oldMin ) minProc();
 	// reset watchdog
 	watchDog=0;
 	// check for admin activity

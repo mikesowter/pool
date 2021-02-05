@@ -3,7 +3,7 @@
 extern FSInfo fs_info;
 extern File fd,fe;
 
-void setupLittleFS () {
+void setupFS () {
 
 //   if(!LittleFS.format()) Serial.println("LittleFS.format failed");
 
@@ -18,6 +18,6 @@ void setupLittleFS () {
   Serial.print(fs_info.usedBytes);
   Serial.println(" bytes used:");
 
-  fd = LittleFS.open("/diags.txt","a");
-  fe = LittleFS.open("/errmess.txt","a");
+  fd = LittleFS.open("diags.txt","a");
+  fe = LittleFS.open("errmess.txt","a");
 }

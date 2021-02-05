@@ -18,7 +18,6 @@ IPAddress dns(192, 168, 1, 1);
 uint32_t localPort = 2395, startSeconds; 
 
 WiFiUDP udp;
-WiFiClient client;
 
 const uint8_t NTP_PACKET_SIZE = 48;
 const uint8_t BUFFER_SIZE = 100;

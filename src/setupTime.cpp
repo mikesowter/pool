@@ -24,7 +24,7 @@ void setupTime() {
   oldHour = hour();
   oldDay = day();
   oldMonth = month();
-  strcpy(todayName,"/pt");
+  strcpy(todayName,"sp");
   strcat(todayName,dateStamp());
   strcat(todayName,".csv");
 }

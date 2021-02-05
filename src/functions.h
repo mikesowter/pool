@@ -45,8 +45,8 @@ void handleNotFound();
 void minProc();
 // setupServer
 void setupServer();
-// setupLittleFS
-void setupLittleFS ();
+// setupFS
+void setupFS ();
 // writeFiles
 uint8_t storeData();
 uint8_t openFile(const char* s);

@@ -8,6 +8,7 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266FTPServer.h>
 #include <LittleFS.h>
+#include <ThingSpeak.h>
 #include <Ticker.h>
 #include <ArduinoOTA.h>
 #include <OneWire.h>
@@ -25,6 +26,7 @@ String resetDetail = ESP.getResetInfo();
 
 ESP8266WebServer server(80);
 FtpServer ftpSrv;
+WiFiClient client;
 time_t getNtpTime();
 FSInfo fs_info;
 File fh,fd,fe;
