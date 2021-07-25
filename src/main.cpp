@@ -82,7 +82,7 @@ void watchWait(uint32_t timer) {
     // check for OTA
     ArduinoOTA.handle();
     // check for FTP request
-		ftpSrv.handleFTP();
+		ftpSrv.handleFTP(FS_ID);
   }
   digitalWrite(LEDPin,1);
 }

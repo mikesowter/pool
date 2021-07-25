@@ -5,10 +5,10 @@ extern File fd,fe;
 
 void setupFS () {
 
-//   if(!LittleFS.format()) Serial.println("LittleFS.format failed");
+  // if(!LittleFS.format()) Serial.println("LittleFS.format failed");
 
   if ( !LittleFS.begin() ) {
-    if ( !LittleFS.format() ) Serial.println("LittleFS.format failed");
+    // if ( !LittleFS.format() ) Serial.println("LittleFS.format failed");
     Serial.println("LittleFS.begin failed");
   }
  
@@ -18,6 +18,6 @@ void setupFS () {
   Serial.print(fs_info.usedBytes);
   Serial.println(" bytes used:");
 
-  fd = LittleFS.open("diags.txt","a");
-  fe = LittleFS.open("errmess.txt","a");
+  fd = LittleFS.open("//diags.txt","a");
+  fe = LittleFS.open("//errmess.txt","a");
 }

@@ -6,8 +6,9 @@
 #include <TimeLib.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
-#include <ESP8266FTPServer.h>
+#include <ESPFTPServer.h>
 #include <LittleFS.h>
+#define FS_ID LittleFS
 #include <ThingSpeak.h>
 #include <Ticker.h>
 #include <ArduinoOTA.h>
@@ -47,10 +48,10 @@ char charBuf[128];
 char dateStr[7];
 char timeStr[10];
 
-uint8_t oldMin, oldQtr, oldHour, oldDay, oldMonth;
+uint8_t oldMin, oldFive, oldHour, oldDay, oldMonth;
 uint8_t reply[260];
 float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
-float level,rain_t,rain_y=0.0,rain_m=0.0;   // rain today since midnight, yesterday, this month
+float level,rain_t,rain_y,rain_m;   // rain today since midnight, yesterday, this month
 float batteryVolts;
 float celsius[3], sumTemp[5];
 uint32_t fileSize, secsSinceRestart;

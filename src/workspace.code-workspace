@@ -1,0 +1,32 @@
+{
+	"folders": [
+    {
+      "name": "DS battery",
+      "path": "..\\..\\DS battery"
+    },
+    {
+      "path": ".."
+    }
+  ],
+	"settings": {
+		"terminal.integrated.env.windows": {
+			"PATH": "C:\\Users\\Mikes 6700K\\.platformio\\penv\\Scripts;C:\\Users\\Mikes 6700K\\.platformio\\penv;C:\\Program Files\\Haskell\\bin;C:\\Program Files\\Haskell Platform\\8.4.3\\lib\\extralibs\\bin;C:\\Program Files\\Haskell Platform\\8.4.3\\bin;C:\\Python27\\;C:\\Python27\\Scripts;C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Common Files\\Acronis\\VirtualFile\\;C:\\Program Files (x86)\\Common Files\\Acronis\\VirtualFile64\\;C:\\Program Files (x86)\\Common Files\\Acronis\\SnapAPI\\;C:\\Program Files\\LLVM\\bin;C:\\Program Files\\erl7.2.1\\bin;C:\\HashiCorp\\Vagrant\\bin;C:\\Program Files (x86)\\Calibre2\\;C:\\Program Files (x86)\\Elixir\\bin;C:\\Users\\Mikes 6700K\\.mix\\escripts;C:\\Program Files\\PostgreSQL\\9.5\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\PuTTY\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\dotnet\\;C:\\Program Files\\Git\\cmd;C:\\Program Files (x86)\\Bitvise SSH Client;C:\\Program Files\\Haskell Platform\\8.4.3\\mingw\\bin;C:\\Program Files\\Calibre2\\;C:\\Users\\Mikes 6700K\\.cargo\\bin;C:\\Users\\Mikes 6700K\\AppData\\Roaming\\local\\bin;C:\\Users\\Mikes 6700K\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Mikes 6700K\\AppData\\Local\\atom\\bin;C:\\cygwin64\\bin;C:\\Users\\Mikes 6700K\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\Mikes 6700K\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;;%USERPROFILE%\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Program Files\\Haskell\\bin;C:\\Program Files\\Haskell Platform\\8.4.3\\lib\\extralibs\\bin;C:\\Program Files\\Haskell Platform\\8.4.3\\bin;C:\\Python27\\;C:\\Python27\\Scripts;C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Common Files\\Acronis\\VirtualFile\\;C:\\Program Files (x86)\\Common Files\\Acronis\\VirtualFile64\\;C:\\Program Files (x86)\\Common Files\\Acronis\\SnapAPI\\;C:\\Program Files\\LLVM\\bin;C:\\Program Files\\erl7.2.1\\bin;C:\\HashiCorp\\Vagrant\\bin;C:\\Program Files (x86)\\Calibre2\\;C:\\Program Files (x86)\\Elixir\\bin;C:\\Users\\Mikes 6700K\\.mix\\escripts;C:\\Program Files\\PostgreSQL\\9.5\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\PuTTY\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\dotnet\\;C:\\Program Files\\Git\\cmd;C:\\Program Files (x86)\\Bitvise SSH Client;C:\\Program Files\\Haskell Platform\\8.4.3\\mingw\\bin;C:\\Program Files\\Calibre2\\;C:\\Users\\Mikes 6700K\\.cargo\\bin;C:\\Users\\Mikes 6700K\\AppData\\Roaming\\local\\bin;C:\\Users\\Mikes 6700K\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Mikes 6700K\\AppData\\Local\\atom\\bin;C:\\cygwin64\\bin;C:\\Users\\Mikes 6700K\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\Mikes 6700K\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;;%USERPROFILE%\\AppData\\Local\\Microsoft\\WindowsApps",
+			"PLATFORMIO_CALLER": "vscode"
+		},
+		"files.associations": {
+      "functional": "cpp",
+      "array": "cpp",
+      "deque": "cpp",
+      "unordered_map": "cpp",
+      "vector": "cpp",
+      "initializer_list": "cpp",
+      "*.tcc": "cpp",
+      "fstream": "cpp",
+      "random": "cpp",
+      "list": "cpp",
+      "string": "cpp",
+      "string_view": "cpp",
+      "ranges": "cpp"
+    }
+	}
+}

@@ -22,9 +22,9 @@ extern char charBuf[];
 extern char dateStr[];
 extern char timeStr[];
 
-extern uint8_t oldMin, oldQtr, oldHour, oldDay, oldMonth;
+extern uint8_t oldMin, oldFive, oldHour, oldDay, oldMonth;
 extern float batteryVolts;
-extern float celsius[],chlo2max,level,rain_m;
+extern float celsius[],chlo2max,level,rain_m,rain_t;
 extern uint32_t fileSize, secsSinceRestart;
 extern uint32_t t0, t1, bootMillis, startMillis, lastScan;
 
@@ -36,11 +36,11 @@ void minProc() {
   fd.flush();
   fe.flush();
   // check for new quarter hour
-  if ( oldQtr == minute()/15 ) return;
+  if ( oldFive == minute()/15 ) return;
   speak();
   storeData();                    // write day file every 15mins
   oldHour = hour();
-  oldQtr = minute()/15;
+  oldFive = minute()/15;
   // check for end of day
   if ( day() == oldDay ) return;
   setupTime();
@@ -51,9 +51,9 @@ void speak() {
   // pump temperature
   ThingSpeak.setField(1,celsius[1]);
   // pool level
-  ThingSpeak.setField(2,-level);
+  ThingSpeak.setField(2,level);
   // monthly rain
-  ThingSpeak.setField(3,rain_m);
+  ThingSpeak.setField(3,rain_m+rain_t);
   // chlorine max
   ThingSpeak.setField(4,chlo2max);
 
