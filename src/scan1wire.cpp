@@ -12,7 +12,7 @@ uint16_t numSamp[3], knownAddr[3] = {0xFFAF,0xFF83,0xFFDB};
 extern float celsius[3], sumTemp[5];
 extern char charBuf[];
 
-void scan1Wire() {
+void readTemps() {
   while ( ds.search(addr)) {
 
     if ( OneWire::crc8(addr, 7) != addr[7] ) {
@@ -23,7 +23,7 @@ void scan1Wire() {
     }
 
     ds.reset();
-    ds.select(addr);
+    ds.select(addr);        
     ds.write(0x44,1);        // start conversion, with parasite power on
 
     watchWait(750UL);
@@ -63,7 +63,7 @@ void scan1Wire() {
       else if (cfg == 0x40) raw = raw & ~1; // 11 bit res, 375 ms
       // no else - do nothing if 12 bit
     }
-    if ( raw > -160 && raw < 800 ) {    // don't use unreasonable values
+    if ( raw > 80 && raw < 800 ) {    // don't use unreasonable values
       celsius[probe] = (float)raw / 16.0;
       sumTemp[probe] += celsius[probe];
       numSamp[probe] += 1;

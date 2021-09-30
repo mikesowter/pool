@@ -51,7 +51,7 @@ void setupFS ();
 uint8_t storeData();
 uint8_t openFile(const char* s);
 void writeTemps();
-void scan1Wire();
+void readTemps();
 void scan2Wire();
 void minProc();
 void readnano();

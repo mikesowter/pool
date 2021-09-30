@@ -13,7 +13,7 @@ void setup()
   ThingSpeak.begin(client);
   Wire.setClock(100000UL);
   // setup rain reset & LED
-  pinMode(R_D, OUTPUT);
+  pinMode(resetRainDay, OUTPUT);
   pinMode(LEDPin, OUTPUT);
   // setup over the air updates
   init_OTA();
@@ -37,7 +37,7 @@ void setup()
 void loop()
 {
   // read temperatures
-	scan1Wire();
+	readTemps();
   // scan 2-wire line to nano
   scan2Wire();
 	// scheduled activity

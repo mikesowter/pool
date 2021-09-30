@@ -1,8 +1,8 @@
 #include <arduino.h>
 #include <TimeLib.h>
 
-#define R_D 0 // D3
-#define R_M 2 // D4
+#define resetRainDay 0 // D3
+#define resetRainMonth 2 // D4
 
 char* dateStamp();
 char* timeStamp();
@@ -34,9 +34,9 @@ void dayCheck() {
   rain_y = rain_t;
   rain_m += rain_t;
   rain_t = 0.0;
-  digitalWrite(R_D,1);        // reset day in slave
+  digitalWrite(resetRainDay,1);        // reset day in slave
   delay(1000);
-  digitalWrite(R_D,0);
+  digitalWrite(resetRainDay,0);
   if (oldMonth != month()) rain_m = 0.0;
   setupTime();
   return;

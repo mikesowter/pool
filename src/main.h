@@ -19,7 +19,7 @@ extern "C" {
 
 #define SCL 5 // D1
 #define SDA 4 // D2
-#define R_D 0 // D3
+#define resetRainDay 0 // D3
 #define LEDPin 2 // Onboard LED
 
 String resetReason = "restart: " + ESP.getResetReason();

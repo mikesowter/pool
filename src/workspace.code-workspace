@@ -1,8 +1,14 @@
 {
 	"folders": [
     {
-      "name": "DS battery",
       "path": "..\\..\\DS battery"
+    },
+    {
+      "name": "MPPT nano",
+      "path": "..\\..\\MPPT nano"
+    },
+    {
+      "path": "..\\..\\Pool slave"
     },
     {
       "path": ".."
