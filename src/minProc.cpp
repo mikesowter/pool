@@ -24,7 +24,7 @@ extern char timeStr[];
 
 extern uint8_t oldMin, oldFive, oldHour, oldDay, oldMonth;
 extern float batteryVolts;
-extern float celsius[],chlo2max,level,rain_m,rain_t;
+extern float celsius[],chlo2max,level,rain_m,rain_t,rain_y;
 extern uint32_t fileSize, secsSinceRestart;
 extern uint32_t t0, t1, bootMillis, startMillis, lastScan;
 
@@ -43,7 +43,13 @@ void minProc() {
   oldFive = minute()/15;
   // check for end of day
   if ( day() == oldDay ) return;
+  rain_y = rain_t;
+  rain_m += rain_t;
+  rain_t = 0;
   setupTime();
+  // check for end of month
+  if ( month() == oldMonth ) return;
+  rain_m = 0;
   return;
 }  
 

@@ -23,7 +23,6 @@ char* f2s2(float f);
 void watchWait(uint32_t timer);
 // setupTime
 void setupTime();
-void dayCheck();
 // setupInv
 void setupInv();
 // queryInv

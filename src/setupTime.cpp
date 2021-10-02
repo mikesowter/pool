@@ -28,16 +28,3 @@ void setupTime() {
   strcat(todayName,dateStamp());
   strcat(todayName,".csv");
 }
-
-void dayCheck() {
-  if (oldDay == day()) return;
-  rain_y = rain_t;
-  rain_m += rain_t;
-  rain_t = 0.0;
-  digitalWrite(resetRainDay,1);        // reset day in slave
-  delay(1000);
-  digitalWrite(resetRainDay,0);
-  if (oldMonth != month()) rain_m = 0.0;
-  setupTime();
-  return;
-}
