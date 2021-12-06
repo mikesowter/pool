@@ -5,15 +5,14 @@ void setup()
 {
 	bootMillis = millis();
 	Serial.begin(115200);
-	Serial.println("\n\rPool Master Rev 1.4 20201212");
+	Serial.println("\n\rPool Master Rev 1.5 20211206");
 	// join local network and internet
 	joinNet();
   // setup as I2C master
 	Wire.begin();
   ThingSpeak.begin(client);
   Wire.setClock(100000UL);
-  // setup rain reset & LED
-  pinMode(resetRainDay, OUTPUT);
+  // setup LED
   pinMode(LEDPin, OUTPUT);
   // setup over the air updates
   init_OTA();

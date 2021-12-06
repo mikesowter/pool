@@ -10,7 +10,8 @@ extern File fd, fe;
 extern uint16_t longStrLen;
 extern float celsius[], batteryVolts;
 extern bool onBattery;
-extern float level,rain_t,rain_y,rain_m,surfaceTemp;
+extern uint16_t rain,rain_t,rain_y,rain_m,rain_mo,rain_do;
+extern float level,surfaceTemp;
 extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 extern uint8_t reply[];
 
@@ -36,13 +37,13 @@ void handleMetrics() {
   addCstring(f2s2(-level));
   addCstring("\n# TYPE spRain_t guage" );
   addCstring("\nspRain_t ");
-  addCstring(f2s2(rain_t));
+  addCstring(i3sd(rain_t));
   addCstring("\n# TYPE spRain_y guage" );
   addCstring("\nspRain_y ");
-  addCstring(f2s2(rain_y));
+  addCstring(i3sd(rain_y));
   addCstring("\n# TYPE spRain_m guage" );
   addCstring("\nspRain_m ");
-  addCstring(f2s2(rain_m));
+  addCstring(i3sd(rain_m));
   
   addCstring("\n# TYPE spClmin1 guage" );
   addCstring("\nspClmin1 ");
@@ -95,7 +96,7 @@ void handleWave() {
 }
 
 void handleNotFound() {
-  server.uri().toCharArray(userText, 14);
+  server.uri().toCharArray(userText, 30);
 
   if (LittleFS.exists(userText)) {
     listFile();
@@ -124,6 +125,22 @@ void handleNotFound() {
     fd.close();
 		fe.close();
     ESP.restart();
+  }
+    else if (strncmp(userText,"/setrain",7)==0) {
+    char* tok;
+    tok = strtok(userText,",");
+    tok = strtok(NULL,",");
+    rain_t = atoi(tok);
+    rain_do = rain - rain_t;
+    tok = strtok(NULL,",");
+    rain_y = atoi(tok);
+    tok = strtok(NULL,",");
+    rain_m = atoi(tok);
+    rain_mo = rain - rain_m;
+    sprintf(charBuf,"rain_t %d, rain_y %d, rain_m %d\n",rain_t,rain_y,rain_m);
+    diagMess(charBuf);  
+    strcpy(charBuf,"<!DOCTYPE html><html><head><HR>rain updated<HR></head></html>");
+    server.send ( 200, "text/html", charBuf );
   }
     else {
     Serial.print(timeStamp());

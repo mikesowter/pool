@@ -24,7 +24,8 @@ extern char timeStr[];
 
 extern uint8_t oldMin, oldFive, oldHour, oldDay, oldMonth;
 extern float batteryVolts;
-extern float celsius[],chlo2max,level,rain_m,rain_t,rain_y;
+extern float celsius[],chlo2max,level;
+extern uint16_t rain,rain_t,rain_y,rain_m,rain_mo,rain_do;
 extern uint32_t fileSize, secsSinceRestart;
 extern uint32_t t0, t1, bootMillis, startMillis, lastScan;
 
@@ -44,12 +45,14 @@ void minProc() {
   // check for end of day
   if ( day() == oldDay ) return;
   rain_y = rain_t;
-  rain_m += rain_t;
   rain_t = 0;
-  setupTime();
+  rain_do = rain;
   // check for end of month
-  if ( month() == oldMonth ) return;
-  rain_m = 0;
+  if ( month() != oldMonth ) {
+    rain_m = 0;
+    rain_mo = rain;
+  }
+  setupTime();
   return;
 }  
 
@@ -59,7 +62,7 @@ void speak() {
   // pool level
   ThingSpeak.setField(2,level);
   // monthly rain
-  ThingSpeak.setField(3,rain_m+rain_t);
+  ThingSpeak.setField(3,rain_t);
   // chlorine max
   ThingSpeak.setField(4,chlo2max);
 

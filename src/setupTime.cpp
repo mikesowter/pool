@@ -12,7 +12,7 @@ extern uint8_t oldMin,oldFive,oldHour,oldDay,oldMonth;
 extern uint32_t t0, startMillis;
 extern char todayName[], charBuf[];
 
-extern float rain_t,rain_y,rain_m; 
+extern uint16_t rain,rain_t,rain_y,rain_m,rain_mo,rain_do;
 
 void setupTime() {
   setTime(getTime());

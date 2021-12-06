@@ -1,17 +1,19 @@
 {
 	"folders": [
     {
-      "path": "..\\..\\DS battery"
+      "path": "..\\..\\MPPT nano"
     },
     {
-      "name": "MPPT nano",
-      "path": "..\\..\\MPPT nano"
+      "path": "..\\..\\MPPT scanner"
     },
     {
       "path": "..\\..\\Pool slave"
     },
     {
       "path": ".."
+    },
+    {
+      "path": "..\\..\\pulse"
     }
   ],
 	"settings": {

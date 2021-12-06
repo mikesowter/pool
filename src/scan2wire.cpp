@@ -6,7 +6,8 @@ uint32_t timer;
 bool framed;
 extern bool reboot;
 extern uint8_t reply[];
-extern float level,rain_t,rain_y,rain_m,surfaceTemp; 
+extern float level,surfaceTemp;
+extern uint16_t rain,rain_t,rain_y,rain_m,rain_mo,rain_do;
 extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 char mess[100] = "";
 
@@ -42,12 +43,9 @@ void scan2Wire() {
       if ( level == 0 ) level = -float(reading)/100.0;
       else level = 0.99*level - 0.0001*float(reading);
   //  }
-    rain_t = float(256*reply[3]+reply[4]);  // recalibration Dec 2020
-    if ( reboot ) {     // compromise, but works well later in month
-      rain_m = rain_t;
-      reboot = false;
-    } 
-    rain_t -= rain_m;
+    rain = 256*reply[3]+reply[4];  // recalibration Dec 2020
+    rain_m = rain - rain_mo;
+    rain_t = rain - rain_do;
     surfaceTemp = float(256*reply[5]+reply[6])/16.0;  
 
     chlo1min = (float)(reply[10]-127);
