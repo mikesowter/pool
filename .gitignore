@@ -5,3 +5,4 @@
 data
 .vscode
 src/secrets.h
+.fake

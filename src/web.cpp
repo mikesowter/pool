@@ -10,7 +10,7 @@ extern File fd, fe;
 extern uint16_t longStrLen;
 extern float celsius[], batteryVolts;
 extern bool onBattery;
-extern uint16_t rain,rain_t,rain_y,rain_m,rain_mo,rain_do;
+extern int16_t rain,rain_t,rain_y,rain_m,rain_mo,rain_do;
 extern float level,surfaceTemp;
 extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 extern uint8_t reply[];

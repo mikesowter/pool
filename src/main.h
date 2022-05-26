@@ -49,9 +49,9 @@ char dateStr[7];
 char timeStr[10];
 
 uint8_t oldMin, oldFive, oldHour, oldDay, oldMonth;
-uint8_t reply[384];
+uint8_t reply[384];  //todo = why so big?
 float level,chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
-uint16_t rain,rain_t,rain_y,rain_m,rain_mo,rain_do;   // rain accummulated in pool slave
+int16_t rain,rain_t,rain_y,rain_m,rain_mo,rain_do;   // rain increments in pool slave
 float surfaceTemp;
 float batteryVolts;
 float celsius[3], sumTemp[5];

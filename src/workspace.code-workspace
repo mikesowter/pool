@@ -1,19 +1,10 @@
 {
 	"folders": [
     {
-      "path": "..\\..\\MPPT nano"
-    },
-    {
-      "path": "..\\..\\MPPT scanner"
-    },
-    {
-      "path": "..\\..\\Pool slave"
-    },
-    {
       "path": ".."
     },
     {
-      "path": "..\\..\\pulse"
+      "path": "..\\..\\Pool slave"
     }
   ],
 	"settings": {

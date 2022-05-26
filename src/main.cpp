@@ -5,7 +5,7 @@ void setup()
 {
 	bootMillis = millis();
 	Serial.begin(115200);
-	Serial.println("\n\rPool Master Rev 1.5 20211206");
+	Serial.println("\n\rPool Master Rev 1.6 20220526");
 	// join local network and internet
 	joinNet();
   // setup as I2C master
@@ -60,13 +60,13 @@ void ISRwatchDog () {
   }
 	// rejoin local network if necessary
 	if (WiFi.status() != WL_CONNECTED) joinNet();
-	// check for scan failure
+	/* check for scan failure
 	if (millis() - lastScan > 630000UL) {
 		diagMess("Prometheus 10m scan fail");
 	  fd.close();
 		fe.close();
-    ESP.restart();
-	}  
+    ESP.restart();   
+	}   */
   interrupts();
 }
 
