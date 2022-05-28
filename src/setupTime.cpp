@@ -5,7 +5,7 @@ char* dateStamp();
 char* timeStamp();
 unsigned long getTime();
 
-extern uint8_t oldMin,oldFive,oldHour,oldDay,oldMonth;
+extern uint8_t oldMin,oldQtr,oldHour,oldDay,oldMonth;
 extern uint32_t t0, startMillis;
 extern char todayName[], charBuf[];
 
@@ -15,7 +15,7 @@ void setupTime() {
   startMillis = millis();
   t0 = millis();
   oldMin = minute();
-  oldFive = oldMin/15;
+  oldQtr = oldMin/15;
   oldHour = hour();
   oldDay = day();
   oldMonth = month();

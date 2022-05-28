@@ -37,6 +37,7 @@ OneWire  ds(12);                // on GPIO12 - pin D6 on d1-mini
 
 bool onBattery = false;          // switch to enable sleep if required
 bool reboot = true;
+bool scanFail = false;
 
 char fileName[] = "/XXyymmdd.csv";
 char fileSizeStr[10];
@@ -48,10 +49,10 @@ char charBuf[128];
 char dateStr[7];
 char timeStr[10];
 
-uint8_t oldMin, oldFive, oldHour, oldDay, oldMonth;
+uint8_t oldMin, oldQtr, oldHour, oldDay, oldMonth;
 uint8_t reply[384];  //todo = why so big?
 float level,chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
-int16_t rain,rain_t,rain_y,rain_m,rain_mo,rain_do;   // rain increments in pool slave
+int16_t rain,rain_d,rain_y,rain_m,rain_mo,rain_do;   // rain increments in pool slave
 float surfaceTemp;
 float batteryVolts;
 float celsius[3], sumTemp[5];

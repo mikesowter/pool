@@ -60,13 +60,19 @@ void ISRwatchDog () {
   }
 	// rejoin local network if necessary
 	if (WiFi.status() != WL_CONNECTED) joinNet();
-	/* check for scan failure
-	if (millis() - lastScan > 630000UL) {
-		diagMess("Prometheus 10m scan fail");
-	  fd.close();
-		fe.close();
-    ESP.restart();   
-	}   */
+	// check for scan failure
+  if (!scanFail) {
+    if (millis() - lastScan > 630000UL) {
+      diagMess("Prometheus 10m scan fail");
+      scanFail = true;  
+    } 
+  }
+  else {
+    if (millis() - lastScan < 63000UL) {
+      diagMess("Prometheus scan restored");
+      scanFail = false;  
+    }
+  }  
   interrupts();
 }
 

@@ -15,12 +15,12 @@ extern char charBuf[];
 void readTemps() {
   while ( ds.search(addr)) {
 
-    if ( OneWire::crc8(addr, 7) != addr[7] ) {
+/*    if ( OneWire::crc8(addr, 7) != addr[7] ) {
       fe=LittleFS.open("scanErrs.txt","a");
       fe.printf("\n%s %s addr = %X bad CRC!\n",dateStamp(),timeStamp(),addr);
       fe.close();
       return;
-    }
+    }   */
 
     ds.reset();
     ds.select(addr);        

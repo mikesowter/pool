@@ -7,7 +7,7 @@ bool framed;
 extern bool reboot;
 extern uint8_t reply[];
 extern float level,surfaceTemp;
-extern int16_t rain,rain_t,rain_y,rain_m,rain_mo,rain_do;
+extern int16_t rain,rain_d,rain_y,rain_m,rain_mo,rain_do;
 extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 char mess[100] = "";
 
@@ -38,21 +38,20 @@ void scan2Wire() {
 
   
   if (reply[0]=='L') {
-    int reading = 256*reply[1]+reply[2];
-  //  if ( reading > 500 && reading < 25000 ) {
-      if ( level == 0 ) level = -float(reading)/100.0;
-      else level = 0.98*level - 0.0002*float(reading);
-  //  }
-    rain = 256*reply[3]+reply[4];  // recalibration Dec 2020
+    float newLevel = -float(256*reply[1]+reply[2])/100.0;
+    if ( level == 0 ) level = newLevel;
+    else if ( newLevel > level-10 && newLevel < level+10 ) {
+      level = 0.99*level + 0.01*float(newLevel);
+    }   
+    rain = 256*reply[3]+reply[4];  // 1 count = 1mm Dec 2020
 
   // rain upcounts to 33m, resets on slave restart, rain added to log    
     if (rain == 0) { // if slave restarted rain=0
-      rain_do = rain - rain_t;  
+      rain_do = rain - rain_d;  
       rain_mo = rain - rain_m;  
     }
-    rain_t = rain - rain_do;       // daily offset set in minProc
+    rain_d = rain - rain_do;       // daily offset set in minProc
     rain_m = rain - rain_mo;       // monthly offset set in minProc
-
 
     surfaceTemp = float(256*reply[5]+reply[6])/16.0;  
 
@@ -64,7 +63,7 @@ void scan2Wire() {
     chlo2rms = (float)reply[15]/4.0; 
   }
 
-//    sprintf(mess,"Level: %.1f C1min: %.1f C1max: %.1f C1rms: %.1f Rain: %.1f",level,chlo1min,chlo1max,chlo1rms,rain_t);
+//    sprintf(mess,"Level: %.1f C1min: %.1f C1max: %.1f C1rms: %.1f Rain: %.1f",level,chlo1min,chlo1max,chlo1rms,rain_d);
 //    diagMess(mess);
 }
 
