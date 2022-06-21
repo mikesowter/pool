@@ -1,10 +1,13 @@
 {
 	"folders": [
     {
-      "path": ".."
+      "path": "..\\..\\solar_master"
     },
     {
-      "path": "..\\..\\Pool slave"
+      "path": "..\\..\\RMS slave"
+    },
+    {
+      "path": ".."
     }
   ],
 	"settings": {

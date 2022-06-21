@@ -19,7 +19,6 @@ extern "C" {
 
 #define SCL 5 // D1
 #define SDA 4 // D2
-#define resetRainDay 0 // D3
 #define LEDPin 2 // Onboard LED
 
 String resetReason = "restart: " + ESP.getResetReason();
@@ -50,7 +49,7 @@ char dateStr[7];
 char timeStr[10];
 
 uint8_t oldMin, oldQtr, oldHour, oldDay, oldMonth;
-uint8_t reply[384];  //todo = why so big?
+uint8_t reply[256];  
 float level,chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 int16_t rain,rain_d,rain_y,rain_m,rain_mo,rain_do;   // rain increments in pool slave
 float surfaceTemp;

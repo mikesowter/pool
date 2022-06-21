@@ -30,7 +30,9 @@ void setup()
 	resetReason.toCharArray(charBuf,resetReason.length()+1);
 	errMess(charBuf);       // restart message
 	resetDetail.toCharArray(charBuf,resetDetail.length()+1);
-  if ( charBuf[16] != '0' )	errMess(charBuf);       		
+  if ( charBuf[16] != '0' )	errMess(charBuf);    
+  // read last good rain values
+  getLastScan();   		
 }
 
 void loop()

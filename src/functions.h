@@ -23,9 +23,9 @@ char* f2s2(float f);
 void watchWait(uint32_t timer);
 // setupTime
 void setupTime();
-// setupInv
+// setup Inverter
 void setupInv();
-// queryInv
+// query Inverter
 void queryInv();
 void readBytes(bool HexOut);
 void addCstring(const char* s);
@@ -50,7 +50,11 @@ void setupFS ();
 uint8_t storeData();
 uint8_t openFile(const char* s);
 void writeTemps();
+// read pool,pump and air temperatures
 void readTemps();
+// read values from pool slave
 void scan2Wire();
+// time scheduled processing
 void minProc();
-void readnano();
+// read last good rain values
+void getLastScan();

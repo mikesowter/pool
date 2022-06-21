@@ -40,15 +40,16 @@ void scan2Wire() {
   if (reply[0]=='L') {
     float newLevel = -float(256*reply[1]+reply[2])/100.0;
     if ( level == 0 ) level = newLevel;
-    else if ( newLevel > level-10 && newLevel < level+10 ) {
+    else if ( newLevel > level-10 && newLevel < level+50 ) {
       level = 0.99*level + 0.01*float(newLevel);
     }   
     rain = 256*reply[3]+reply[4];  // 1 count = 1mm Dec 2020
 
   // rain upcounts to 33m, resets on slave restart, rain added to log    
-    if (rain == 0) { // if slave restarted rain=0
+    if (rain == 0 || reboot) { // if slave or master restarted 
       rain_do = rain - rain_d;  
       rain_mo = rain - rain_m;  
+      reboot = false;
     }
     rain_d = rain - rain_do;       // daily offset set in minProc
     rain_m = rain - rain_mo;       // monthly offset set in minProc
@@ -66,4 +67,5 @@ void scan2Wire() {
 //    sprintf(mess,"Level: %.1f C1min: %.1f C1max: %.1f C1rms: %.1f Rain: %.1f",level,chlo1min,chlo1max,chlo1rms,rain_d);
 //    diagMess(mess);
 }
+
 
