@@ -63,7 +63,7 @@ void getLastScan() {
   strcat(query,host);
   strcat(query,Str7);
 
-  diagMess(query);
+  // diagMess(query);
 
   if (client.connect(host, 9090)) {
     client.write(query,strlen(query));
@@ -81,7 +81,7 @@ void getLastScan() {
 //      sprintf(longStr,"\n%d bytes: \n%s\n",buffPtr,buff);
     for (numPtr = buffPtr-8; numPtr>buffPtr-18; numPtr-- ) {
       if (buff[numPtr] == '\"') {
-        diagMess(buff+numPtr);
+      //  diagMess(buff+numPtr);
         rain_d = atoi(buff+numPtr+1);
       }
     }
@@ -119,7 +119,7 @@ void getLastScan() {
   // read most recent spRain_m
 
   query[37] = 'm';      // spRain_m
-  diagMess(query);
+  // diagMess(query);
   if (client.connect(host, 9090)) {
     client.write(query,strlen(query));
     buffPtr = 0;
@@ -136,7 +136,7 @@ void getLastScan() {
     Serial.printf("\n%d bytes: \n%s\n",buffPtr,buff);
     for (numPtr = buffPtr-8; numPtr>buffPtr-18; numPtr-- ) {
       if (buff[numPtr] == '\"') {
-        diagMess(buff+numPtr);
+      //  diagMess(buff+numPtr);
         rain_m = atoi(buff+numPtr+1);
       }
     }
