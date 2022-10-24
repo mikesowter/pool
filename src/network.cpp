@@ -47,13 +47,13 @@ unsigned long getTime() {
 
   uint32_t ms = millis();
   while (udp.parsePacket()!= NTP_PACKET_SIZE) {
-    if (millis() - ms > 2500) {
+    if (millis() - ms > 5000) {
       Serial.println("\nno reply from Aus NTP server");
       diagMess("no reply from Aus NTP server");
       break;
     }
     sendNTPrequest(ausTimeServerIP);
-    delay(500);
+    delay(1000);
   }
   startSeconds = getNTPreply();
   if (startSeconds > year2017 && startSeconds < year2030) return startSeconds;
@@ -64,7 +64,7 @@ unsigned long getTime() {
       break;
     }
     sendNTPrequest(localTimeServerIP);
-    delay(500);
+    delay(1000);
   }
   startSeconds = getNTPreply();
   yield();

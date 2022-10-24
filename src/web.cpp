@@ -126,7 +126,7 @@ void handleNotFound() {
 		fe.close();
     ESP.restart();
   }
-    else if (strncmp(userText,"/setrain",7)==0) {
+    else if (strncmp(userText,"/rainDYM",7)==0) {
     char* tok;
     tok = strtok(userText,",");
     tok = strtok(NULL,",");
