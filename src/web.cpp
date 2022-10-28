@@ -11,7 +11,7 @@ extern uint16_t longStrLen;
 extern float celsius[], batteryVolts;
 extern bool onBattery;
 extern int16_t rain,rain_d,rain_y,rain_m,rain_mo,rain_do;
-extern float level,surfaceTemp;
+extern float rawlevel,level,surfaceTemp;
 extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 extern uint8_t reply[];
 
@@ -35,6 +35,9 @@ void handleMetrics() {
   addCstring("\n# TYPE spPoolLevel guage" );
   addCstring("\nspPoolLevel ");
   addCstring(f2s2(-level));
+  addCstring("\n# TYPE spRawLevel guage" );
+  addCstring("\nspRawLevel ");
+  addCstring(f2s2(-rawlevel));  
   addCstring("\n# TYPE spRain_t guage" );
   addCstring("\nspRain_t ");
   addCstring(i3sd(rain_d));

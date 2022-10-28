@@ -6,7 +6,7 @@ uint32_t timer;
 bool framed;
 extern bool reboot;
 extern uint8_t reply[];
-extern float level,surfaceTemp;
+extern float rawlevel,level,surfaceTemp;
 extern int16_t rain,rain_d,rain_y,rain_m,rain_mo,rain_do;
 extern float chlo1min,chlo1max,chlo1rms,chlo2min,chlo2max,chlo2rms;
 char mess[100] = "";
@@ -38,10 +38,10 @@ void scan2Wire() {
 
   
   if (reply[0]=='L') {
-    float newLevel = -float(256*reply[1]+reply[2])/100.0;
-    if ( level == 0 ) level = newLevel;
-    else if ( newLevel > level-10 && newLevel < level+50 ) {
-      level = 0.99*level + 0.01*float(newLevel);
+    rawlevel = -float(256*reply[1]+reply[2])/100.0;
+    if ( level == 0 ) level = rawlevel;
+    else if ( rawlevel > level-10 && rawlevel < level+50 ) {
+      level = 0.99*level + 0.01*float(rawlevel);
     }   
     rain = 256*reply[3]+reply[4];  // 1 count = 1mm Dec 2020
 
