@@ -17,7 +17,7 @@ char* timeStamp();
 void printHex(uint8_t X);
 char* i2sh(uint8_t b);
 char* i2sd(uint8_t b);
-char* i3sd(uint8_t b);
+char* itoc(int16_t b);
 char* f2s2(float f);
 // main
 void watchWait(uint32_t timer);

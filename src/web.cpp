@@ -40,13 +40,13 @@ void handleMetrics() {
   addCstring(f2s2(-rawlevel));  
   addCstring("\n# TYPE spRain_t guage" );
   addCstring("\nspRain_t ");
-  addCstring(i3sd(rain_d));
+  addCstring(itoc(rain_d));
   addCstring("\n# TYPE spRain_y guage" );
   addCstring("\nspRain_y ");
-  addCstring(i3sd(rain_y));
+  addCstring(itoc(rain_y));
   addCstring("\n# TYPE spRain_m guage" );
   addCstring("\nspRain_m ");
-  addCstring(i3sd(rain_m));
+  addCstring(itoc(rain_m));
   
   addCstring("\n# TYPE spClmin1 guage" );
   addCstring("\nspClmin1 ");
@@ -90,9 +90,9 @@ void handleMetrics() {
 void handleWave() {
   longStr[0] = '\0';
   for ( int i=16;i<136;i++) {
-    addCstring(i3sd(reply[i]));
+    addCstring(itoc(reply[i]));
     addCstring(",");
-    addCstring(i3sd(reply[i+120]));
+    addCstring(itoc(reply[i+120]));
     addCstring("\n");
   }
   server.send ( 200, "text/plain", longStr );

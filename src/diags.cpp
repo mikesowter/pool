@@ -7,7 +7,7 @@ char* timeStamp();
 void printHex(uint8_t X);
 char* i2sh(uint8_t b);
 char* i2sd(uint8_t b);
-char* i3sd(uint8_t b);
+char* itoc(int16_t b);
 char* f2s2(float f);
 
 extern File fd,fe;
@@ -78,14 +78,10 @@ char* i2sd(uint8_t b) {
   return d2Str;
 }
 
-// convert integer into a 3 Dec string dd
-char* i3sd(uint8_t b) {
-  d3Str[0]=b/100+'0';
-  b=b%100;
-  d3Str[1]=b/10+'0';
-  b=b%10;
-  d3Str[2]=b+'0';
-  return d3Str;
+// convert integer to string
+char* itoc(int16_t b) {
+  dtostrf((double)b, 0, 0, fltStr);
+  return fltStr;
 }
 
 // convert float into char string ddddd.dd

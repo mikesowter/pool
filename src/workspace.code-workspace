@@ -5,6 +5,15 @@
     },
     {
       "path": ".."
+    },
+    {
+      "path": "../../pulse"
+    },
+    {
+      "path": "../../RMS slave"
+    },
+    {
+      "path": "../../Pool slave"
     }
   ],
 	"settings": {
