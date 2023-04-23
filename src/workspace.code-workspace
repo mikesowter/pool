@@ -1,19 +1,25 @@
 {
 	"folders": [
     {
-      "path": "..\\..\\solar_master"
+      "path": "../../RMS slave"
     },
     {
-      "path": ".."
+      "path": "../../Pool slave"
+    },
+    {
+      "path": "../../RMS master"
+    },
+    {
+      "path": "../../solar_master"
+    },
+    {
+      "path": "../../Battery_nano"
     },
     {
       "path": "../../pulse"
     },
     {
-      "path": "../../RMS slave"
-    },
-    {
-      "path": "../../Pool slave"
+      "path": ".."
     }
   ],
 	"settings": {

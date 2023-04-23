@@ -7,6 +7,7 @@ extern char longStr[], fileSizeStr[], fileName[], userText[], charBuf[];
 extern ESP8266WebServer server;
 extern uint32_t fileSize, lastScan, bootMillis;
 extern File fd, fe;
+extern FSInfo fs_info;
 extern uint16_t longStrLen;
 extern float celsius[], batteryVolts;
 extern bool onBattery;
@@ -145,7 +146,21 @@ void handleNotFound() {
     strcpy(charBuf,"<!DOCTYPE html><html><head><HR>rain updated<HR></head></html>");
     server.send ( 200, "text/html", charBuf );
   }
-    else {
+    else if (strncmp(userText,"/format",7)==0) {
+    fd.close();
+    fe.close();
+    if (!LittleFS.format()) Serial.println("LittleFS.format failed");
+    LittleFS.info(fs_info);
+    Serial.print(fs_info.totalBytes);
+    Serial.println(" bytes available");
+    Serial.print(fs_info.usedBytes);
+    Serial.println(" bytes used:");
+    fd = LittleFS.open("/diags.txt","a+");
+    fe = LittleFS.open("/errmess.txt","a+");
+    sprintf(charBuf,"reformatted,%d bytes available",fs_info.totalBytes);
+    diagMess(charBuf);  
+    fd.flush();
+  } else {
     Serial.print(timeStamp());
     Serial.print(userText);
     Serial.println(" is not a valid option");
