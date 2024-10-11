@@ -51,7 +51,7 @@ uint8_t storeData();
 uint8_t openFile(const char* s);
 void writeTemps();
 // read pool,pump and air temperatures
-void readTemps();
+void scan1Wire();
 // read values from pool slave
 void scan2Wire();
 // time scheduled processing

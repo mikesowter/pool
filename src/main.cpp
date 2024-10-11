@@ -5,7 +5,7 @@ void setup()
 {
 	bootMillis = millis();
 	Serial.begin(115200);
-	Serial.println("\n\rPool Master Rev 1.6 20220526");
+	Serial.println("\n\rPool Master Rev 1.7 20241004");
 	// join local network and internet
 	joinNet();
   // setup as I2C master
@@ -38,7 +38,7 @@ void setup()
 void loop()
 {
   // read temperatures
-	readTemps();
+	scan1Wire();
   // scan 2-wire line to nano
   scan2Wire();
 	// scheduled activity

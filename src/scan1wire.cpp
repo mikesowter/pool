@@ -7,24 +7,24 @@ extern File fe;
 extern OneWire ds;
 
 uint8_t data[12], addr[8], probe, numProbes = 3;
-uint16_t numSamp[3], knownAddr[3] = {0xFFAF,0xFF83,0xFFDB};
+uint16_t numSamp[3], knownAddr[3] = {0xFF2F,0xFF83,0xFFDB}; //pool,pump,air
 
 extern float celsius[3], sumTemp[5];
 extern char charBuf[];
 
-void readTemps() {
+void scan1Wire() {
   while ( ds.search(addr)) {
 
-/*    if ( OneWire::crc8(addr, 7) != addr[7] ) {
+    if ( OneWire::crc8(addr, 7) != addr[7] ) {
       fe=LittleFS.open("scanErrs.txt","a");
-      fe.printf("\n%s %s addr = %X bad CRC!\n",dateStamp(),timeStamp(),addr);
+      fe.printf("\n%s %s addr = %2X%2X bad CRC!\n",dateStamp(),timeStamp(),addr[1],addr[2]);
       fe.close();
       return;
-    }   */
+    }   
 
     ds.reset();
     ds.select(addr);        
-    ds.write(0x44,1);        // start conversion, with parasite power on
+    ds.write(0x44,1);        // start conversion, with parasite power on    Serial.printf("\naddr = %2X%2X\n",addr[1],addr[2]);
 
     watchWait(750UL);
 
